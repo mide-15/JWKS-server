@@ -1,4 +1,6 @@
 from datetime import UTC, datetime
+import os
+import sqlite3
 import pytest
 from app import app
 import jwt
@@ -39,3 +41,4 @@ def test_Expired_JWK_is_expired(client):
     test = client.post('/auth')
     data = jwt.decode(test.get_json().get('token'), '3ba010226cd84939b9eed91aa6bd9519', algorithms=['HS256'])
     assert data['exp'] > data['iat']
+
